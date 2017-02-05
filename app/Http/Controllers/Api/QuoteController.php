@@ -13,9 +13,19 @@ class QuoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Quote::all();
+        $query = $request->input('query');
+        $limit = $request->input('limit') ?: 10;
+        $offset = $request->input('offset') ?: 0;
+
+        $quotes = Quote::limit($limit)->offset($offset);
+
+        if ($query) {
+            $quotes = $quotes->where('content', 'like', "%$query%");
+        }
+
+        return $quotes->get();
     }
 
     public function random()
