@@ -4,8 +4,12 @@
             General
         </p>
         <ul class="menu-list">
-            <li><router-link to="/" exact>Home</router-link></li>
-            <li><router-link to="/about">About</router-link></li>
+            <li>
+                <router-link to="/" exact>Home</router-link>
+            </li>
+            <li>
+                <router-link to="/about">About</router-link>
+            </li>
         </ul>
     </aside>
 </template>

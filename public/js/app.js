@@ -3288,6 +3288,17 @@ var app = new Vue({
     router: __WEBPACK_IMPORTED_MODULE_1__routes__["a" /* default */]
 });
 
+document.getElementById("nav-toggle").addEventListener("click", toggleNav);
+function toggleNav() {
+    var nav = document.getElementById("nav-menu");
+    var className = nav.getAttribute("class");
+    if (className == "nav-right nav-menu") {
+        nav.className = "nav-right nav-menu is-active";
+    } else {
+        nav.className = "nav-right nav-menu";
+    }
+}
+
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
@@ -4153,6 +4164,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = {
     mounted: function mounted() {
@@ -4204,16 +4219,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_quote_RandomQuote__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_quote_RandomQuote___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_quote_RandomQuote__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Greeting__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_Greeting___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_Greeting__);
 //
 //
 //
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = {
-    components: { randomquote: __WEBPACK_IMPORTED_MODULE_0__components_quote_RandomQuote___default.a },
+    components: { randomquote: __WEBPACK_IMPORTED_MODULE_0__components_quote_RandomQuote___default.a, greeting: __WEBPACK_IMPORTED_MODULE_1__components_Greeting___default.a },
     mounted: function mounted() {
         axios.get('/api/quotes').then(function (response) {
             return console.log(response);
@@ -4268,13 +4287,7 @@ window.axios.defaults.headers.common = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_router__);
 
 
-var routes = [{
-    path: '/',
-    component: __webpack_require__(39)
-}, {
-    path: '/about',
-    component: __webpack_require__(38)
-}];
+var routes = [{ path: '/', component: __webpack_require__(39) }, { path: '/about', component: __webpack_require__(38) }, { path: '/quotes', component: __webpack_require__(54) }];
 
 /* harmony default export */ __webpack_exports__["a"] = new __WEBPACK_IMPORTED_MODULE_0_vue_router___default.a({
     routes: routes,
@@ -4322,7 +4335,7 @@ module.exports = Component.exports
 
 var Component = __webpack_require__(1)(
   /* script */
-  null,
+  __webpack_require__(56),
   /* template */
   __webpack_require__(40),
   /* scopeId */
@@ -4461,12 +4474,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "nav-left"
   }, [_c('router-link', {
     staticClass: "nav-item is-tab",
+    class: _vm.custom,
     attrs: {
       "to": "/",
       "exact": ""
     }
   }, [_vm._v("Home")]), _vm._v(" "), _c('router-link', {
     staticClass: "nav-item is-tab",
+    class: _vm.custom,
+    attrs: {
+      "to": "/quotes",
+      "exact": ""
+    }
+  }, [_vm._v("Quotes")]), _vm._v(" "), _c('router-link', {
+    staticClass: "nav-item is-tab",
+    class: _vm.custom,
     attrs: {
       "to": "/about",
       "exact": ""
@@ -4518,7 +4540,7 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
-  }, [_c('randomquote')], 1)
+  }, [_c('greeting'), _vm._v(" "), _c('randomquote')], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -13173,6 +13195,158 @@ module.exports = g;
 __webpack_require__(10);
 module.exports = __webpack_require__(11);
 
+
+/***/ }),
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    data: function data() {
+        return {
+            user: {}
+        };
+    },
+
+    methods: {
+        getUser: function getUser() {
+            var _this = this;
+
+            axios.get('api/user').then(function (response) {
+                return _this.user = response.data;
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.getUser();
+    }
+};
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(51),
+  /* template */
+  __webpack_require__(53),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/dekarvn/dev/php/aio/resources/assets/js/components/Greeting.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Greeting.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-25734328", Component.options)
+  } else {
+    hotAPI.reload("data-v-25734328", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_vm._v("Hello " + _vm._s(_vm.user.name))])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-25734328", module.exports)
+  }
+}
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(1)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(55),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/dekarvn/dev/php/aio/resources/assets/js/views/Quotes.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Quotes.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7ed1c252", Component.options)
+  } else {
+    hotAPI.reload("data-v-7ed1c252", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_vm._v("Quotes")])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-7ed1c252", module.exports)
+  }
+}
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = {
+    props: ['custom']
+};
 
 /***/ })
 /******/ ]);
