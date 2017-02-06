@@ -1,14 +1,15 @@
 <template>
-    <div>
-        Hello, this is the Home Page
-        <randomquote></randomquote>
-    </div>
+<div class="container">
+    <sidenav></sidenav>
+</div>
 </template>
 
 <script>
-    import randomquote from '../components/quote/RandomQuote'
-
+    import sidenav from '../components/SideNav'
     export default {
-        components: {randomquote}
+        components: { sidenav },
+        mounted() {
+            axios.get('/api/quotes').then((response) => console.log( response ))
+        }
     }
 </script>
