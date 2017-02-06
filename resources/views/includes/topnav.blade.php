@@ -1,11 +1,13 @@
 <nav class="nav has-shadow">
     <div class="container">
+        @if(!Auth::guest())
         <div class="nav-left">
             <!--a class="nav-item">
                 <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma logo">
             </a-->
-            <a class="nav-item is-tab is-hidden-mobile {{ isActiveRoute('home') }}" href="{{ route('home') }}">Home</a>
+            <topnav></topnav>
         </div>
+        @endif
         <span class="nav-toggle">
       <span></span>
       <span></span>

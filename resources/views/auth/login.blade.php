@@ -3,6 +3,10 @@
 @section('content')
 <div class="columns">
     <div class="box column is-half-desktop is-offset-one-quarter">
+        <div class="content">
+            <p>Login to access your All In One application</p>
+        </div>
+
         <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
             <p class="control has-icon">

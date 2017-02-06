@@ -1,14 +1,13 @@
 <template>
-    <div>
-        <clients></clients>
-        Hello, this is the Home Page
-    </div>
+<div class="container">
+    <sidenav></sidenav>
+</div>
 </template>
 
 <script>
-    import clients from '../components/passport/Clients'
+    import sidenav from '../components/SideNav'
     export default {
-        components: { clients },
+        components: { sidenav },
         mounted() {
             axios.get('/api/quotes').then((response) => console.log( response ))
         }
