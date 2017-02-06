@@ -1,13 +1,13 @@
 <template>
 <div class="container">
-    <sidenav></sidenav>
+    <randomquote></randomquote>
 </div>
 </template>
 
 <script>
-    import sidenav from '../components/SideNav'
+    import randomquote from '../components/quote/RandomQuote'
     export default {
-        components: { sidenav },
+        components: { randomquote },
         mounted() {
             axios.get('/api/quotes').then((response) => console.log( response ))
         }
