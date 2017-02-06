@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/quotes/random', 'Api\QuoteController@random');
-Route::resource('quotes', 'Api\QuoteController');
+//Route::resource('quotes', 'Api\QuoteController');
+Route::middleware('auth:api')->resource('quotes', 'Api\QuoteController');

@@ -177,6 +177,9 @@ return [
         MinhD\AIO\Providers\EventServiceProvider::class,
         MinhD\AIO\Providers\RouteServiceProvider::class,
 
+        // Passport
+        Laravel\Passport\PassportServiceProvider::class
+
     ],
 
     /*
