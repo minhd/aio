@@ -14,3 +14,15 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'testapi'], function () {
+
+    Route::get('/user', function (Request $request)    {
+        return $request->user();
+    });
+
+    Route::get('/quotes/random', 'Api\QuoteController@random');
+
+    Route::resource('quotes', 'Api\QuoteController');
+
+});

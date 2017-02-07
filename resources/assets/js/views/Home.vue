@@ -9,9 +9,6 @@
     import randomquote from '../components/quote/RandomQuote'
     import greeting from '../components/Greeting'
     export default {
-        components: {randomquote, greeting},
-        mounted() {
-            axios.get('/api/quotes').then((response) => console.log(response))
-        }
+        components: {randomquote, greeting}
     }
 </script>

@@ -1,17 +1,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Vuex from "vuex";
 import axios from "axios";
 
+import moment from "moment-timezone";
 window.Vue = Vue;
+
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
 window.axios = axios;
+window.moment = moment;
 
 window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
     'X-Requested-With': 'XMLHttpRequest'
 };
-
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

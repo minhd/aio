@@ -1,5 +1,5 @@
 <template>
-    <div class="content" @click="getQuote" v-if="quote.content">
+    <div class="content" @click="getQuote(quote.id)" v-if="quote.content">
         <blockquote>
             {{ quote.content }}
         </blockquote>
@@ -14,8 +14,8 @@
             }
         },
         methods: {
-            getQuote() {
-                axios.get('api/quotes/random').then((response) => {
+            getQuote(id) {
+                axios.get('api/quotes/random'+"?butnot="+id).then((response) => {
                     if (response.data.length > 0) {
                         this.quote = response.data[0]
                     }
@@ -23,7 +23,7 @@
             }
         },
         mounted() {
-            this.getQuote()
+            this.getQuote('')
         }
     }
 </script>

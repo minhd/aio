@@ -15,7 +15,10 @@ class CreateQuotesTable extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text("content");
+            $table->string('author', 50)->nullable();
             $table->timestamps();
         });
     }

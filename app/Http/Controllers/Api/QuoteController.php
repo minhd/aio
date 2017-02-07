@@ -19,7 +19,12 @@ class QuoteController extends Controller
         $limit = $request->input('limit') ?: 10;
         $offset = $request->input('offset') ?: 0;
 
-        $quotes = Quote::limit($limit)->offset($offset);
+        $quotes = Quote::limit($limit)->offset($offset)
+            ->orderBy('updated_at', 'desc');
+
+        if ($request->user()) {
+            $quotes = $quotes->where('user_id', $request->user()->id);
+        }
 
         if ($query) {
             $quotes = $quotes->where('content', 'like', "%$query%");
@@ -28,9 +33,15 @@ class QuoteController extends Controller
         return $quotes->get();
     }
 
-    public function random()
+    public function random(Request $request)
     {
-        return Quote::inRandomOrder()->take(1)->get();
+        $quote = Quote::inRandomOrder();
+
+        if ($request->input('butnot')) {
+            $quote = $quote->where('id', '!=', $request->input('butnot'));
+        }
+
+        return $quote->take(1)->get();
     }
 
     /**
@@ -59,7 +70,11 @@ class QuoteController extends Controller
             return $validator->errors();
         }
 
-        return Quote::create(['content' => $request->input('content')]);
+        return Quote::create([
+            'content' => $request->input('content'),
+            'author' => $request->input('author'),
+            'user_id' => $request->input('user_id') ?: $request->user()->id
+        ]);
     }
 
     /**
@@ -104,6 +119,7 @@ class QuoteController extends Controller
      */
     public function destroy(Quote $quote)
     {
-        //
+        $quote->delete();
+        return ['success'];
     }
 }
