@@ -18,9 +18,11 @@ class QuoteController extends Controller
         $query = $request->input('query');
         $limit = $request->input('limit') ?: 10;
         $offset = $request->input('offset') ?: 0;
+        $orderBy = $request->input('sortBy') ?: 'updated_at';
+        $orderDirection = $request->input('sortDirection') ?: 'desc';
 
         $quotes = Quote::limit($limit)->offset($offset)
-            ->orderBy('updated_at', 'desc');
+            ->orderBy($orderBy, $orderDirection);
 
         if ($request->user()) {
             $quotes = $quotes->where('user_id', $request->user()->id);

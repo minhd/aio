@@ -1,12 +1,20 @@
 <template>
     <div>
-        <p class="control has-icon">
-            <input class="input is-small" type="text" placeholder="Search" v-model.lazy="query" @change="getResources()">
-            <span class="icon is-small"><i class="fa fa-search"></i></span>
-        </p>
+        <div class="is-clearfix">
+            <p class="control has-icon is-pulled-right">
+                <input class="input is-small" type="text" placeholder="Search" v-model.lazy="query" @change="getResources()">
+                <span class="icon is-small"><i class="fa fa-search"></i></span>
+            </p>
+            <p class="control is-pulled-left">
+                <select class="select" @change="getResources()" v-model="limit">
+                    <option v-for="lim in limits" v-bind:value="lim">Show {{ lim }}</option>
+                </select>
+            </p>
+        </div>
+
         <table class="table is-striped">
             <thead>
-                <th v-for="column in columns">{{ column }}</th>
+                <th v-for="column in columns" @click="toggleSort(column)">{{ column }}</th>
                 <th>Action</th>
             </thead>
             <tfoot>
@@ -36,7 +44,11 @@
         data() {
             return {
                 resources: [],
-                query: ''
+                query: '',
+                limit: 10,
+                sortBy: 'updated_at',
+                sortDirection: 'desc',
+                limits: [10, 50, 100]
             }
         },
         mounted() {
@@ -48,8 +60,14 @@
         },
         methods: {
             getResources() {
-                axios.get('api/' + this.resource + '/?query=' + this.query)
-                    .then((response) => this.resources = response.data);
+                axios.get('api/' + this.resource, {
+                    params: {
+                        query: this.query,
+                        limit: this.limit,
+                        sortBy: this.sortBy,
+                        sortDirection: this.sortDirection
+                    }
+                }).then((response) => this.resources = response.data);
             },
             deleteResource(res) {
                 let that = this;
@@ -62,6 +80,15 @@
                     return moment.utc(res[column]).fromNow();
                 }
                 return res[column];
+            },
+            toggleSort(heading) {
+                if (this.sortBy == heading) {
+                    this.sortDirection = this.sortDirection == 'desc' ? 'asc' : 'desc';
+                } else {
+                    this.sortBy = heading;
+                    this.sortDirection = "desc";
+                }
+                this.getResources();
             }
         }
     }

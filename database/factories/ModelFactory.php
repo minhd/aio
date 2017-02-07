@@ -25,6 +25,8 @@ $factory->define(MinhD\AIO\User::class, function (Faker\Generator $faker) {
 
 $factory->define(\MinhD\AIO\Quote\Quote::class, function(Faker\Generator $faker){
    return [
-       'content' => $faker->sentence
+       'content' => $faker->sentence,
+       'author' => $faker->word,
+       'user_id' => 1
    ];
 });
