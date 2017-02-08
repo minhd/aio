@@ -14,6 +14,9 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', function() {
+    return redirect()->to('/');
+});
 
 Route::group(['prefix' => 'testapi'], function () {
 
