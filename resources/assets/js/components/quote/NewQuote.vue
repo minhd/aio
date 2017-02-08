@@ -10,6 +10,7 @@
             <button class="button is-success">Add Quote</button>
         </p>
     </form>
+
 </template>
 
 <script>

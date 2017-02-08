@@ -34,16 +34,28 @@
                 </tr>
             </tbody>
         </table>
+        <button class="button is-success" @click="showAddModal"><i class="fa fa-plus"></i> Add New</button>
+
+        <modal :visible.sync="showModal" transition="fade" @close="closeAddModal">
+            <div class="box content has-text-centered">
+                <new-quote v-if="resource == 'quotes'"></new-quote>
+            </div>
+        </modal>
     </div>
 </template>
 
 <script>
 
+    import Modal from '../components/display/Modal'
+    import NewQuote from '../components/quote/NewQuote'
+
     export default {
         props: ['resource', 'columns', 'friendlytimecolumns'],
+        components: { Modal, NewQuote },
         data() {
             return {
                 resources: [],
+                showModal: false,
                 query: '',
                 limit: 10,
                 sortBy: 'updated_at',
@@ -89,6 +101,12 @@
                     this.sortDirection = "desc";
                 }
                 this.getResources();
+            },
+            showAddModal() {
+                this.showModal = true;
+            },
+            closeAddModal() {
+                this.showModal = false;
             }
         }
     }

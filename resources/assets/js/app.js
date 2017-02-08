@@ -14,7 +14,9 @@ const app = new Vue({
     router,
     store,
     mounted() {
-        axios.get('api/user').then((response) => this.$store.state.user = response.data)
+        axios.get('api/user')
+            .then((response) => this.$store.state.user = response.data)
+            .catch((error) => console.error('User is not logged in', error));
     }
 });
 
