@@ -1,7 +1,20 @@
 <template>
     <div class="container">
-        <greeting></greeting>
-        <randomquote></randomquote>
+        <div class="tile is-ancestor is-12">
+            <div class="tile is-parent is-7">
+                <div class="box hero-body has-text-centered tile is-child">
+                    <greeting></greeting>
+                </div>
+
+            </div>
+            <div class="tile is-parent is-5">
+                <div class="box tile is-child">
+                    <randomquote></randomquote>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </template>
 
