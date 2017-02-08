@@ -1,50 +1,49 @@
-@extends('layouts.master')
+@extends('layouts.fullscreen')
 
 @section('content')
-<div class="columns">
-    <div class="box column is-half-desktop is-offset-one-quarter">
-        <div class="content">
-            <p>Login to access your All In One application</p>
-        </div>
-
-        <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-            {{ csrf_field() }}
-            <p class="control has-icon">
-                <input class="input {{ isValidationFail($errors, 'email') }}" type="email" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
-                <span class="icon is-small">
-                    <i class="fa fa-envelope"></i>
-                </span>
-                @if ($errors->has('email'))
-                    <span class="help is-danger">
-                        {{ $errors->first('email') }}
-                    </span>
-                @endif
-            </p>
-            <p class="control has-icon">
-                <input class="input {{ isValidationFail($errors, 'password') }}" type="password" placeholder="Password" name="password" required autofocus>
-                <span class="icon is-small">
-                    <i class="fa fa-lock"></i>
-                </span>
-                @if ($errors->has('password'))
-                    <span class="help is-danger">
-                        {{ $errors->first('password') }}
-                    </span>
-                @endif
-            </p>
-            <p class="control">
-                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-            </p>
-            <p class="control">
-                <button class="button is-success">
-                    Login
-                </button>
-                <a class="button is-white" href="{{ route('password.request') }}">
-                    Forgot Your Password?
-                </a>
-            </p>
-        </form>
+    <div class="content">
+        <p>Login to access your All In One application</p>
     </div>
-</div>
+
+    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
+        {{ csrf_field() }}
+        <p class="control has-icon">
+            <input class="input {{ isValidationFail($errors, 'email') }}" type="email" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
+            <span class="icon is-small">
+                <i class="fa fa-envelope"></i>
+            </span>
+            @if ($errors->has('email'))
+                <span class="help is-danger">
+                    {{ $errors->first('email') }}
+                </span>
+            @endif
+        </p>
+        <p class="control has-icon">
+            <input class="input {{ isValidationFail($errors, 'password') }}" type="password" placeholder="Password" name="password" required autofocus>
+            <span class="icon is-small">
+                <i class="fa fa-lock"></i>
+            </span>
+            @if ($errors->has('password'))
+                <span class="help is-danger">
+                    {{ $errors->first('password') }}
+                </span>
+            @endif
+        </p>
+        <p class="control">
+            <label class="checkbox">
+                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                Remember me
+            </label>
+        </p>
+        <p class="control">
+            <button class="button is-success">
+                Login
+            </button>
+            <a class="button is-link" href="{{ route('password.request') }}">
+                Forgot Your Password?
+            </a>
+        </p>
+    </form>
 @endsection
 
 @section('content2')

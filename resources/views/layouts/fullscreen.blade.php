@@ -21,14 +21,20 @@
 </head>
 
 <body>
-    <div id="app">
-        @include("includes.topnav")
-        <div id="content">
-            @yield("content")
+
+<section class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns">
+                <div class="box column is-half-desktop is-offset-3">
+                    <div class="content">
+                        @include('includes.topnav')
+                    </div>
+                    @yield("content")
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="/js/lib.js"></script>
-    <script src="/js/app.js"></script>
 </body>

@@ -1,69 +1,65 @@
-@extends('layouts.master')
+@extends('layouts.fullscreen')
 
 @section('content')
-    <div class="columns">
-        <div class="box column is-half-desktop is-offset-one-quarter">
-            <div class="content">
-                <p>Login to access your All In One application</p>
-            </div>
+<div class="content">
+    <p>Login to access your All In One application</p>
+</div>
 
-            <form class="form-horizontal" role="form" method="POST"
-                  action="{{ route('register') }}">
-                {{ csrf_field() }}
+<form class="form-horizontal" role="form" method="POST"
+      action="{{ route('register') }}">
+    {{ csrf_field() }}
 
-                <p class="control">
-                    <input class="input {{ isValidationFail($errors, 'name') }}"
-                           type="text" placeholder="Name" name="name"
-                           value="{{ old('name') }}">
-                    @if ($errors->has('name'))
-                        <span class="help is-danger">
-                            {{ $errors->first('name') }}
-                        </span>
-                    @endif
-                </p>
+    <p class="control">
+        <input class="input {{ isValidationFail($errors, 'name') }}"
+               type="text" placeholder="Name" name="name"
+               value="{{ old('name') }}">
+        @if ($errors->has('name'))
+            <span class="help is-danger">
+                {{ $errors->first('name') }}
+            </span>
+        @endif
+    </p>
 
-                <p class="control">
-                    <input class="input {{ isValidationFail($errors, 'email') }}"
-                           type='email' placeholder="Email" name="email"
-                           value="{{ old('email') }}">
-                    @if ($errors->has('email'))
-                        <span class="help is-danger">
-                            {{ $errors->first('email') }}
-                        </span>
-                    @endif
-                </p>
+    <p class="control">
+        <input class="input {{ isValidationFail($errors, 'email') }}"
+               type='email' placeholder="Email" name="email"
+               value="{{ old('email') }}">
+        @if ($errors->has('email'))
+            <span class="help is-danger">
+                {{ $errors->first('email') }}
+            </span>
+        @endif
+    </p>
 
-                <p class="control">
-                    <input class="input {{ isValidationFail($errors, 'password') }}"
-                           type='password' placeholder="Password" name="password"
-                           value="{{ old('password') }}">
-                    @if ($errors->has('password'))
-                        <span class="help is-danger">
-                            {{ $errors->first('password') }}
-                        </span>
-                    @endif
-                </p>
+    <p class="control">
+        <input class="input {{ isValidationFail($errors, 'password') }}"
+               type='password' placeholder="Password" name="password"
+               value="{{ old('password') }}">
+        @if ($errors->has('password'))
+            <span class="help is-danger">
+                {{ $errors->first('password') }}
+            </span>
+        @endif
+    </p>
 
-                <p class="control">
-                    <input class="input {{ isValidationFail($errors, 'password_confirmation') }}"
-                           type='password' placeholder="Password Confirmation" name="password_confirmation"
-                           value="{{ old('password_confirmation') }}">
-                    @if ($errors->has('password_confirmation'))
-                        <span class="help is-danger">
-                            {{ $errors->first('password_confirmation') }}
-                        </span>
-                    @endif
-                </p>
+    <p class="control">
+        <input class="input {{ isValidationFail($errors, 'password_confirmation') }}"
+               type='password' placeholder="Password Confirmation" name="password_confirmation"
+               value="{{ old('password_confirmation') }}">
+        @if ($errors->has('password_confirmation'))
+            <span class="help is-danger">
+                {{ $errors->first('password_confirmation') }}
+            </span>
+        @endif
+    </p>
 
-                <p class="control">
-                    <button class="button is-success">
-                        Register
-                    </button>
-                </p>
+    <p class="control">
+        <button class="button is-success">
+            Register
+        </button>
+    </p>
 
-            </form>
-        </div>
-    </div>
+</form>
 @endsection
 
 @section('content2')
