@@ -1,12 +1,26 @@
-import "./bootstrap"
 import router from "./routes"
-import axios from "axios"
 import sidenav from "./components/SideNav"
 import topnav from "./components/TopNav"
 
 import { store } from "./store";
 
 window.eventBus = new Vue();
+
+import Notification from './components/display/Notification'
+const NotificationComponent = window.Vue.extend(Notification)
+window.openNotification = (propsData = {
+    title: '',
+    message: '',
+    type: '',
+    direction: '',
+    duration: 3000,
+    container: '.notifications'
+}) => {
+    return new NotificationComponent({
+        el: document.createElement('div'),
+        propsData
+    })
+}
 
 const app = new Vue({
     el: '#app',

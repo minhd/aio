@@ -2,6 +2,7 @@
 
 namespace MinhD\AIO\Http\Controllers\Api;
 
+use Illuminate\Validation\ValidationException;
 use MinhD\AIO\Quote\Quote;
 use Illuminate\Http\Request;
 use MinhD\AIO\Http\Controllers\Controller;
@@ -64,13 +65,9 @@ class QuoteController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+        $this->validate($request, [
             'content' => 'required'
         ]);
-
-        if ($validator->fails()) {
-            return $validator->errors();
-        }
 
         return Quote::create([
             'content' => $request->input('content'),
@@ -78,6 +75,8 @@ class QuoteController extends Controller
             'user_id' => $request->input('user_id') ?: $request->user()->id
         ]);
     }
+
+
 
     /**
      * Display the specified resource.

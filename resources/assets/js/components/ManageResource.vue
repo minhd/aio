@@ -36,7 +36,7 @@
         </table>
         <button class="button is-success" @click="showAddModal"><i class="fa fa-plus"></i> Add New</button>
 
-        <modal :visible.sync="showModal" transition="fade" @close="closeAddModal">
+        <modal :visible.sync="showModal" transition="zoom" @close="closeAddModal">
             <div class="box content has-text-centered">
                 <new-quote v-if="resource == 'quotes'"></new-quote>
             </div>

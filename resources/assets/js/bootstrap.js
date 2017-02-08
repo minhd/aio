@@ -11,6 +11,7 @@ Vue.use(Vuex);
 
 window.axios = axios;
 window.moment = moment;
+window.VueRouter = VueRouter;
 
 window.axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
