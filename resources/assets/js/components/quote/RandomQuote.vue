@@ -10,7 +10,9 @@
     export default {
         data() {
             return {
-                quote: {}
+                quote: {},
+                duration: 5000,
+                timer: null
             }
         },
         methods: {
@@ -24,6 +26,10 @@
         },
         mounted() {
             this.getQuote('')
+            this.timer = setInterval(() => this.getQuote(this.quote.id), this.duration)
+        },
+        destroyed() {
+            clearInterval(this.timer);
         }
     }
 </script>

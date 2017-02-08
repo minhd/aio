@@ -1653,7 +1653,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
         return {
-            quote: {}
+            quote: {},
+            duration: 5000,
+            timer: null
         };
     },
 
@@ -1669,7 +1671,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        var _this2 = this;
+
         this.getQuote('');
+        this.timer = setInterval(function () {
+            return _this2.getQuote(_this2.quote.id);
+        }, this.duration);
+    },
+    destroyed: function destroyed() {
+        clearInterval(this.timer);
     }
 };
 
