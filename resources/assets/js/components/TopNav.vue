@@ -3,6 +3,7 @@
     <router-link to="/" exact class="nav-item is-tab" v-bind:class="custom">Home</router-link>
     <router-link to="/quotes" exact class="nav-item is-tab" v-bind:class="custom">Quotes</router-link>
     <router-link to="/about" exact class="nav-item is-tab" v-bind:class="custom">About</router-link>
+    <router-link to="/settings" exact class="nav-item is-tab" v-bind:class="custom">Settings</router-link>
 </div>
 </template>
 
