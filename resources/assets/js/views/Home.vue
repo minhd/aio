@@ -14,12 +14,14 @@
             </div>
         </div>
 
+        <type-ahead></type-ahead>
 
     </div>
 </template>
 
 <script>
     import randomquote from '../components/quote/RandomQuote'
+    import TypeAhead from '../components/TypeAhead'
     import greeting from '../components/Greeting'
 
     export default {
@@ -28,7 +30,7 @@
                 showModal: false
             }
         },
-        components: {randomquote, greeting },
+        components: {randomquote, greeting, TypeAhead },
         mounted() {
             openNotification({
                 message: 'Welcome',
