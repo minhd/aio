@@ -50,7 +50,12 @@
     import NewQuote from '../components/quote/NewQuote'
 
     export default {
-        props: ['resource', 'columns', 'friendlytimecolumns'],
+        props: {
+            resource: { type: String },
+            columns: { type:Array },
+            friendlytimecolumns: { type:String, default:'updated_at' },
+            prefix: { type:String, default:'api' }
+        },
         components: { Modal, NewQuote },
         data() {
             return {
@@ -72,7 +77,7 @@
         },
         methods: {
             getResources() {
-                axios.get('api/' + this.resource, {
+                axios.get(this.prefix + '/' + this.resource, {
                     params: {
                         query: this.query,
                         limit: this.limit,
@@ -83,7 +88,7 @@
             },
             deleteResource(res) {
                 let that = this;
-                axios.delete('api/' + this.resource + '/' + res.id).then(() => {
+                axios.delete(this.prefix + '/' + this.resource + '/' + res.id).then(() => {
                     that.getResources();
                 });
             },
