@@ -14,7 +14,12 @@
             </div>
         </div>
 
+        <div class="box">
+            <mouse-color></mouse-color>
+        </div>
+
         <type-ahead></type-ahead>
+
 
     </div>
 </template>
@@ -23,6 +28,7 @@
     import randomquote from '../components/quote/RandomQuote'
     import TypeAhead from '../components/TypeAhead'
     import greeting from '../components/Greeting'
+    import MouseColor from '../components/MouseColor';
 
     export default {
         data() {
@@ -30,7 +36,7 @@
                 showModal: false
             }
         },
-        components: {randomquote, greeting, TypeAhead },
+        components: {randomquote, greeting, TypeAhead, MouseColor },
         mounted() {
             openNotification({
                 message: 'Welcome',
