@@ -27,4 +27,11 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::resource('quotes', 'Api\QuoteController');
 
+    Route::resource('counters', 'Api\CountersController', ['only' => [
+        'index', 'show', 'store', 'destroy', 'update'
+    ]]);
+    
+    Route::put('counters/{counter}/incr/{value}', 'Api\CountersController@increments');
+    Route::put('counters/{counter}/recalculate', 'Api\CountersController@recalculate');
+
 });

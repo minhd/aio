@@ -17,3 +17,12 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', function() {
     return redirect()->to('/');
 });
+
+Route::get('/test', function() {
+    $user = \MinhD\AIO\User::find(1);
+
+    // Creating a token without scopes...
+    $token = $user->createToken('Token Name')->accessToken;
+
+    dd($token);
+});
