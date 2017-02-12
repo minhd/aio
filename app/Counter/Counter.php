@@ -2,9 +2,17 @@
 
 namespace MinhD\AIO\Counter;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use MinhD\AIO\User;
 
+/**
+ * MinhD\AIO\Counter\Counter
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\MinhD\AIO\Counter\CounterEvent[] $events
+ * @property-read \MinhD\AIO\User $user
+ * @mixin \Eloquent
+ */
 class Counter extends Model
 {
     protected $fillable = ['name'];
@@ -47,6 +55,25 @@ class Counter extends Model
         $counter->user_id = $user->id;
         $counter->save();
         return $counter;
+    }
+
+    public function stats()
+    {
+        $events = collect($this->events()->get());
+        $timezone = 'Australia/Canberra';
+        return [
+            'today' =>  $events->filter(function($item) use($timezone) {
+                return $item->updated_at->timezone($timezone)->dayOfYear == Carbon::today($timezone)->dayOfYear;
+            })->pluck('increment')->sum(),
+            'yesterday' => $events->filter(function($item) use ($timezone) {
+                return $item->updated_at->timezone($timezone)->dayOfYear == Carbon::yesterday($timezone)->dayOfYear;
+            })->pluck('increment')->sum(),
+
+            'this_week' => $events->filter(function($item) use ($timezone) {
+                return $item->updated_at->timezone($timezone)->weekOfYear == Carbon::today($timezone)->weekOfYear;
+            })->pluck('increment')->sum(),
+
+        ];
     }
 
 }

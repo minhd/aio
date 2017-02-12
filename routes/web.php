@@ -24,5 +24,5 @@ Route::get('/test', function() {
     // Creating a token without scopes...
     $token = $user->createToken('Token Name')->accessToken;
 
-    dd($token);
+    return response()->json($token);
 });

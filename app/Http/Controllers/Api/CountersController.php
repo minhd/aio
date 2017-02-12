@@ -61,7 +61,8 @@ class CountersController extends Controller
      */
     public function show(Counter $counter)
     {
-        //
+        $counter->stats = $counter->stats();
+        return response()->json($counter);
     }
 
 

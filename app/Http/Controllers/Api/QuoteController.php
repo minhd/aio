@@ -2,7 +2,6 @@
 
 namespace MinhD\AIO\Http\Controllers\Api;
 
-use Illuminate\Validation\ValidationException;
 use MinhD\AIO\Quote\Quote;
 use Illuminate\Http\Request;
 use MinhD\AIO\Http\Controllers\Controller;
@@ -12,6 +11,7 @@ class QuoteController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -86,7 +86,7 @@ class QuoteController extends Controller
      */
     public function show(Quote $quote)
     {
-        //
+        return response()->json($quote);
     }
 
     /**

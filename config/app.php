@@ -178,7 +178,10 @@ return [
         MinhD\AIO\Providers\RouteServiceProvider::class,
 
         // Passport
-        Laravel\Passport\PassportServiceProvider::class
+        Laravel\Passport\PassportServiceProvider::class,
+
+        // IDE Helper
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
 
     ],
 
