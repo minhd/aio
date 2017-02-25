@@ -3,6 +3,7 @@ let routes = [
     { path: '/about', component: require('./views/About') },
     { path: '/quotes', component: require('./views/Quotes') },
     { path: '/counters', component: require('./views/Counters') },
+    { path: '/testing', component: require('./views/Testing') },
     { path: '/settings', component: require('./views/Settings') },
 ];
 

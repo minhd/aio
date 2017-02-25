@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="is-clearfix">
-            <p class="control has-icon is-pulled-right">
+            <p class="control has-icon is-pulled-right" v-if="showLimit">
                 <input class="input is-small" type="text" placeholder="Search" v-model.lazy="query" @change="getResources()">
                 <span class="icon is-small"><i class="fa fa-search"></i></span>
             </p>
-            <p class="control is-pulled-left">
+            <p class="control is-pulled-left" v-if="showSearch">
                 <select class="select" @change="getResources()" v-model="limit">
                     <option v-for="lim in limits" v-bind:value="lim">Show {{ lim }}</option>
                 </select>
@@ -17,7 +17,7 @@
                 <th v-for="column in columns" @click="toggleSort(column)">{{ column }}</th>
                 <th>Action</th>
             </thead>
-            <tfoot>
+            <tfoot v-if="showTableFooter">
                 <th v-for="column in columns">{{ column }}</th>
                 <th>Action</th>
             </tfoot>
@@ -34,11 +34,19 @@
                 </tr>
             </tbody>
         </table>
-        <button class="button is-success" @click="showAddModal"><i class="fa fa-plus"></i> Add New</button>
+        <button v-if="showAddNew" class="button is-success" @click="showAddModal"><i class="fa fa-plus"></i> Add New</button>
 
         <modal :visible.sync="showModal" transition="zoom" @close="closeAddModal">
             <div class="box content has-text-centered">
                 <new-quote v-if="resource == 'quotes'"></new-quote>
+            </div>
+        </modal>
+
+        <modal :visible.sync="showingDeleteModal" transition="zoom" @close="closeDeleteModal">
+            <div class="box content has-text-centered">
+                Are you sure you want to delete this resource?
+                {{ deleteTarget }}
+                <a href="" class="button" @click="deleteResourceConfirmed(deleteTarget)">Yes</a>
             </div>
         </modal>
     </div>
@@ -50,22 +58,28 @@
     import NewQuote from '../components/quote/NewQuote'
 
     export default {
+        components: { Modal, NewQuote },
         props: {
             resource: { type: String },
             columns: { type:Array },
-            friendlytimecolumns: { type:String, default:'updated_at' },
+            showTableFooter: {type:Boolean, default:false},
+            showLimit: {type:Boolean, default:false},
+            showSearch: {type:Boolean, default:false},
+            showAddNew: {type:Boolean, default:false},
+            friendlytimecolumns: { type:Array, default: () => ['updated_at'] },
             prefix: { type:String, default:'api' }
         },
-        components: { Modal, NewQuote },
         data() {
             return {
                 resources: [],
                 showModal: false,
+                showingDeleteModal: false,
                 query: '',
                 limit: 10,
                 sortBy: 'updated_at',
                 sortDirection: 'desc',
-                limits: [10, 50, 100]
+                limits: [10, 50, 100],
+                deleteTarget: null
             }
         },
         mounted() {
@@ -87,6 +101,13 @@
                 }).then((response) => this.resources = response.data);
             },
             deleteResource(res) {
+                this.deleteTarget = res;
+                this.showDeleteModal();
+                openConfirmationModal({
+                    show: true
+                });
+            },
+            deleteResourceConfirmed(res) {
                 let that = this;
                 axios.delete(this.prefix + '/' + this.resource + '/' + res.id).then(() => {
                     that.getResources();
@@ -112,6 +133,12 @@
             },
             closeAddModal() {
                 this.showModal = false;
+            },
+            showDeleteModal() {
+                this.showingDeleteModal = true;
+            },
+            closeDeleteModal() {
+                this.showingDeleteModal = false;
             }
         }
     }

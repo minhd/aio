@@ -5,6 +5,9 @@
             <manage-resource
                     :resource="'quotes'"
                     :columns="['content', 'author', 'updated_at']"
+                    :showAddNew="true"
+                    :showLimit="true"
+                    :showSearch="true"
                     :friendlytimecolumns="['updated_at']">
             </manage-resource>
         </div>

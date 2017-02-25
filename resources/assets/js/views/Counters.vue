@@ -3,7 +3,7 @@
         <div class="box">
             <manage-resource
                     resource="counters"
-                    :columns="['name', 'count']"
+                    :columns="['name', 'count', 'updated_at']"
             ></manage-resource>
         </div>
     </div>

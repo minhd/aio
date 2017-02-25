@@ -4,6 +4,7 @@
     <router-link to="/quotes" exact class="nav-item is-tab" v-bind:class="custom">Quotes</router-link>
     <router-link to="/counters" exact class="nav-item is-tab" v-bind:class="custom">Counters</router-link>
     <router-link to="/about" exact class="nav-item is-tab" v-bind:class="custom">About</router-link>
+    <router-link to="/testing" exact class="nav-item is-tab" v-bind:class="custom">Testing</router-link>
     <router-link to="/settings" exact class="nav-item is-tab" v-bind:class="custom">Settings</router-link>
 </div>
 </template>

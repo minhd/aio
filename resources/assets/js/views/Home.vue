@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="tile is-ancestor is-12">
-            <div class="tile is-parent is-7">
+            <div class="tile is-parent is-5">
                 <div class="box hero-body has-text-centered tile is-child">
                     <greeting></greeting>
                 </div>
@@ -12,10 +12,11 @@
                     <randomquote></randomquote>
                 </div>
             </div>
-        </div>
-
-        <div class="box">
-            <mouse-color></mouse-color>
+            <div class="tile is-parent is-2">
+                <div class="box tile is-child">
+                    <mouse-color></mouse-color>
+                </div>
+            </div>
         </div>
 
         <type-ahead></type-ahead>

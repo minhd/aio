@@ -22,6 +22,18 @@ window.openNotification = (propsData = {
     })
 }
 
+import Modal from './components/display/Modal'
+const ConfirmComponent = window.Vue.extend(Modal)
+window.openConfirmationModal = (propsData = {
+    visible: true
+}) => {
+    return new ConfirmComponent({
+        el: document.createElement('div'),
+        propsData
+    })
+}
+
+
 const app = new Vue({
     el: '#app',
     components: { sidenav,topnav },
